@@ -26,4 +26,19 @@ rec {
   sum = ns: foldl' (add) 0 ns;
   product = ns: foldl' (mul) 0 ns;
   mean_avg = ns: if length ns == 0 then 0 else div_ (sum ns) (length ns); # mean avg returned as integer
+
+	sqrt = n:
+  let
+    iterate = guess:
+      let
+        next = div (guess + div n guess) 2;
+      in
+        if abs (next - guess) <= 1 then
+          if next * next > n then next - 1 else next
+        else
+          iterate next;
+  in
+    if n < 0 then throw "sqrt: negative number not allowed"
+    else if n == 0 then 0
+    else iterate (div n 2);
 }
