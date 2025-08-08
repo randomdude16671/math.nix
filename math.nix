@@ -3,11 +3,11 @@ let
     div
     mod
     foldl'
-    abs
     length
     ;
 in
 rec {
+	abs = a: if a < 0 then -a else a; 
   add = (a: (b: a + b));
   sub = (a: (b: a - b));
   mul = (a: (b: a * b));
